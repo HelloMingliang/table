@@ -1,0 +1,212 @@
+/*通用样式*/
+html,body{ height: 100%;width: 100%;border: 0;margin: 0;padding: 0;background: #fbfcfc;font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti, "Microsoft YaHei";}
+html, body, span, div, p, a, h1, h2, h3, h4, h5, h6, form, input, img, ul, ol, li, dl, dt, dd, form, textarea, label, table, th, tr, td, header, section, nav, footer, aside, em, button {
+    margin: 0 auto;
+    padding: 0;
+    border: 0;
+    outline: none;
+}
+input{font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti, "Microsoft YaHei";}
+div {display: block;}
+table{border-collapse: collapse;}
+em{font-style: normal;}
+nav,ul,ol,li{list-style: none;}
+a{text-decoration: none;color: #fff;}
+a,input{-webkit-tap-highlight-color:rgba(0,0,0,0);/*ios android去除自带阴影的样式*/}
+input{background: transparent;}
+input[type=date]{background: transparent;}
+
+
+.table{
+    background-color:#fff;
+    font-size:12px;
+    margin: 10px;
+    padding: 10px 30px;
+    border: 1px solid #e0e0e0;
+}
+.spec{
+    display: flex;
+}
+.spec-left{
+    flex: 1;
+    background-color: #f8f8f8;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 20px 0;
+}
+.spec-right{
+    flex: 7;
+    background-color: #f8f8f8;
+    border-bottom: 2px solid #fff;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 20px 0;
+}
+.stock label{
+    float: left;
+    width: 100px;
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
+}
+.stock-sku{
+    float: left;
+    width: 1000px;
+}
+.stock-group{
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+}
+.sku-sub-title{
+    position: relative;
+    padding: 7px 0 7px 10px;
+    margin: 0;
+    color: #666;
+    background-color: #f8f8f8;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: normal;
+    text-align: left;
+}
+.sku-sub-title select{
+    width: 100px;
+    display: block;
+    height: 26px;
+    padding: 0 0 0 8px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #aaa;
+    white-space: nowrap;
+    line-height: 26px;
+    color: #444;
+    text-decoration: none;
+    border-radius: 4px;
+    background-clip: padding-box;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #fff;
+    cursor: pointer;
+}
+.deleatThis{
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    font-size: 14px;
+    line-height: 18px;
+    background: rgba(153,153,153,0.6);
+    border-radius: 10px;
+    text-indent: 0;
+}
+.sku-atom-counter{
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+.lister-counter{
+    display:inline-block;
+}
+.lister-counter-li{
+    border: 1px solid #e0e0e0;
+    padding: 4px;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    width: 80px;
+    vertical-align: middle;
+    text-align: center;
+    position: relative;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.text-counter{
+    display: block;
+    width: 74px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #999;
+}
+.deleat-littleBQ{
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    font-size: 14px;
+    line-height: 18px;
+    background: rgba(153,153,153,0.6);
+    border-radius: 10px;
+    text-indent: 0;
+}
+.addListitem{
+    color: #38f;
+    padding: 0 5px;
+    margin: 9px 5px 0 5px;
+    vertical-align: top;
+    font-weight: normal;
+    text-decoration: none;
+    display: inline-block;
+}
+.add-sku{
+
+}
+.sku-sub-title{
+    position: relative;
+    padding: 7px 0 7px 10px;
+    margin: 0;
+    color: #666;
+    background-color: #f8f8f8;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: normal;
+    text-align: left;
+}
+.addStock{
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    color: #333;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #999;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

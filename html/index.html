@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模仿淘宝库存表格</title>
+    <script src="../js/js/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+    <div class="table">
+        <div class="spec">
+            <div class="spec-left">
+                规格
+            </div>
+            <div class="spec-right">
+                <div class="stock">
+                    <label>商品规格:</label>
+                    <div class="stock-sku">
+                        <div class="stock-group">
+                            <div class="sku-list-container">
+                                <div class="sku-sub-li">
+                                    <div class="sku-sub-title">
+                                        <select name="spec" class="sku-sclect">
+                                            <option value="-1">请选择</option>
+                                            <option value="颜色">颜色</option>
+                                            <option value="尺寸">尺寸</option>
+                                            <option value="大小">大小</option>
+                                        </select>
+                                        <a href="javascript:void(0)" class="deleatThis">X</a>
+                                    </div>
+                                    <div class="sku-atom-counter">
+                                        <div class="lister-counter">
+
+
+                                            <div class="lister-counter-li">
+                                                <span class="text-counter">12</span>
+                                                <a href="javascript:void(0)" class="deleat-littleBQ">X</a>
+                                            </div>
+
+
+                                        </div>
+                                        <a class="addListitem" href="javascript:void(0)">+添加</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="add-sku">
+                                <div class="sku-sub-title">
+                                    <button type="button" class="addStock">添加规格项目</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="spec">
+            <div class="spec-left">
+                库存:
+            </div>
+            <div class="spec-right">
+                <div class="repertory">
+                    <label>商品库存:</label>
+                    <div class="repertory-body">
+                        <div class="kc">
+                            <table class="kc-table">
+                                <thead>
+                                <tr class="kc-table-tr">
+
+                                    <th class="th-pice">价格(元)</th>
+                                    <th class="th-repertory">库存</th>
+                                </tr>
+                                </thead>
+                                <tbody class="kc-table-tbody">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+</html>
