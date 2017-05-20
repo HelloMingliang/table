@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="../css/index.css">
 </head>
 <body>
+<!--标签输入框-->
+<div class="label-input">
+    <input type="text" placeholder="添加规格值" maxlength="20" class="labelIn" />
+    <div class="confirm-btn">
+        <span class="conformBtn confromYes">确定</span>
+        <span class="conformBtn confromNo">取消</span>
+    </div>
+</div>
     <div class="table">
         <div class="spec">
             <div class="spec-left">
@@ -18,30 +26,6 @@
                     <div class="stock-sku">
                         <div class="stock-group">
                             <div class="sku-list-container">
-                                <div class="sku-sub-li">
-                                    <div class="sku-sub-title">
-                                        <select name="spec" class="sku-sclect">
-                                            <option value="-1">请选择</option>
-                                            <option value="颜色">颜色</option>
-                                            <option value="尺寸">尺寸</option>
-                                            <option value="大小">大小</option>
-                                        </select>
-                                        <a href="javascript:void(0)" class="deleatThis">X</a>
-                                    </div>
-                                    <div class="sku-atom-counter">
-                                        <div class="lister-counter">
-
-
-                                            <div class="lister-counter-li">
-                                                <span class="text-counter">12</span>
-                                                <a href="javascript:void(0)" class="deleat-littleBQ">X</a>
-                                            </div>
-
-
-                                        </div>
-                                        <a class="addListitem" href="javascript:void(0)">+添加</a>
-                                    </div>
-                                </div>
 
                             </div>
                             <div class="add-sku">
@@ -84,7 +68,203 @@
         </div>
 
     </div>
+    <div style="display:none" id="sku-sub-li-body">
+        <div class="sku-sub-li">
+            <div class="sku-sub-title">
+                <select name="spec" class="sku-sclect">
+                    <option value="">请选择</option>
+                    <option value="颜色">颜色</option>
+                    <option value="尺寸">尺寸</option>
+                    <option value="大小">大小</option>
+                </select>
+                <a href="javascript:void(0)" class="deleatThis">X</a>
+            </div>
+            <div class="sku-atom-counter">
+                <div class="lister-counter">
 
+
+                </div>
+                <a class="addListitem" href="javascript:void(0)">+添加</a>
+            </div>
+        </div>
+    </div>
 
 </body>
+<script type="text/javascript">
+    //获取鼠标位置
+    function getMousePos(event) {
+        x = event.clientX
+        y = event.clientY
+        return { 'x': x, 'y': y };
+    }
+    $(function(){
+        var skus = [];
+        // skus.push({ ID: "cm", Name: "尺码", Item: [{ ID: "1", Name: "38" }, { ID: "4", Name: "41" }] });
+
+        function drawTable(skus, index, trs, tds) {
+            $(".kc-table-tbody").html('');
+            if (index < skus.length - 1) {
+                var rows = 1;
+                for (var i = index + 1; i < skus.length; i++) {
+                    rows = rows * skus[i].Item.length;
+                }
+                var nextIndex = index + 1;
+                for (var k = 0; k < skus[index].Item.length; k++) {
+                    var td = '<td rowspan="' + rows + '">' + skus[index].Item[k].Name + '</td>';
+                    if (index === 0)
+                        tds = td;
+                    else if (k === 0)
+                        tds += td;
+                    else
+                        tds = td;
+                    drawTable(skus, nextIndex, trs, tds);
+                }
+            } else {
+                for (var j = 0; j < skus[index].Item.length; j++) {
+                    var tr = '<tr>';
+                    if (j === 0)
+                        tr += tds;
+                    tr += '<td>' + skus[index].Item[j].Name + '</td>';
+                    tr += '<td><input class="piceInput" type="text" maxlength="10" /></td><td><input class="kcInput" type="text" maxlength="10" /></td>';
+                    tr += '</tr>';
+                    trs.push(tr);
+                }
+            }
+        }
+        //添加下拉选择框
+        $(".addStock").click(function () {
+            var length = $(".sku-list-container .sku-sub-li").length; //计算添加的数量
+
+            if (length > 0) {      //在添加下一个个规格前先确保添加上一个的规格值
+                if (skus[length - 1].Item.length == 0) {
+                    alert("请先添加上一个规格值");
+                    return;
+                }
+            }
+            $(".th-pice").before('<th class="text-center"></th>');
+            //最多添加三个
+            // if (length == 2) {
+            //     $(".addSku").hide();
+            // }
+            var template = $("#sku-sub-li-body .sku-sub-li");
+            var ins = template.clone();
+            $(".sku-list-container").append(ins);
+            skus.push({ ID: "", Name: "", Item: [] });
+        });
+        //下拉框选择
+        $("body").on("change", ".sku-sclect", function () {
+            var value2 = $(this).val();
+            var eq = $(this).parents(".sku-sub-li").index();
+            $(".kc-table-tr .text-center").eq(eq).html(value2);
+            skus[eq].Name = value2;
+        });
+
+        //删除下拉框
+        $("body").on("click", ".deleatThis", function () {
+            var eq = $(this).parents(".sku-sub-li").index();
+            $(this).parents(".sku-sub-li").remove();        //移除标题
+            var length = $(".sku-list-container .sku-sub-li").length; //计算剩余的数量
+            if (length < 3) {
+                $(".addSku").show();
+            }
+            var trs = [];
+            var index = 0;
+
+            $(".kc-table-tr .text-center").eq(eq).remove();//隐藏标题
+            console.log(eq);
+            skus.splice(eq, 1);
+            if (length == 0) {
+                $('.kc-table-tbody').html('');
+                return;
+            } else {
+                drawTable(skus, index, trs, '');
+                var html = trs.join('');
+                $('.kc-table-tbody').html(html);
+            }
+        });
+
+        //添加二级分类
+        $("body").on("click", ".addListitem", function () {
+            var zb = getMousePos(event);//获取鼠标点击的位置
+            var x = zb.x;
+            var y = zb.y;
+            $(".label-input").css("top", y);
+            $(".label-input").css("left", x);
+            $(".label-input").show();
+            num = $(this);//记录当前点击的对象
+
+        });
+        $(".confromYes").click(function () {
+
+            var value = $(".labelIn").val();
+            if (!value) {
+                $(".label-input").hide();
+                return;
+            }
+            var string = '<div class="lister-counter-li"><span class="text-counter">'
+                + value +
+                '</span><a href="javascript:void(0)" class="deleat-littleBQ">X</a></div>'
+
+            num.siblings(".lister-counter").append(string);//在点击对象下添加内容
+            $(".labelIn").val('');
+            $(".label-input").hide();
+
+            var h = num.parents(".sku-sub-li").index();
+            var Name = skus[h].Name;
+            $(".kc-table-tr .text-center").eq(h).html(Name);
+            $(".kc-table-tr .text-center").eq(h).show();
+
+            //var length = $(".lister-counter .lister-counter-li").length; //计算二级标题的数量
+            //最多添加10个二级标题
+            // if (length >= 10) {
+            //    $(num).hide();
+            //}
+
+            //绘制库存
+            skus[h].Item.push({ Name: value });
+
+            var trs = [];
+            var index = 0;
+            //console.log(skus);
+            drawTable(skus, index, trs, '');
+            var html = trs.join('');
+            $('.kc-table-tbody').html(html);
+        });
+
+        //删除二级标签
+        $("body").on("click", ".deleat-littleBQ", function () {
+
+            var sku1 = $(this).parents(".sku-sub-li").index();
+            var sku2 = $(this).parents(".lister-counter-li").index();
+            var count = $(this).parents(".lister-counter-li").siblings().length; //计算剩余标签的数量
+
+            if (count == 0) {
+                skus.splice(sku1, 1);
+                $(this).parents(".sku-sub-li").remove();
+                $(".kc-table-tr .text-center").eq(sku1).remove();
+                var length = $(".sku-list-container .sku-sub-li").length; //计算剩余的数量
+                if (length < 3) {
+                    $(".addSku").show();
+                }
+            } else {
+                skus[sku1].Item.splice(sku2, 1);
+            }
+            // console.log(sku1, sku2, count);
+
+            var trs = [];
+            var index = 0;
+            drawTable(skus, index, trs, '');
+            var html = trs.join('');
+            $('.kc-table-tbody').html(html);
+            $(this).parents(".lister-counter-li").remove();
+
+        });
+
+        $(".confromNo").click(function () {
+            $(".label-input").hide();
+
+        });
+    });
+
+</script>
 </html>
